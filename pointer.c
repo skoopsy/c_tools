@@ -5,7 +5,7 @@ int main (void) {
     int *int_pointer; // pointer to an integer
 
     int_pointer = &count; // Int_pointer stores the address of count
-    x = *int_pointer; // * dereferences the pointer, meaning: get the value at the address stored in int_pointer
+    x = *int_pointer; // * dereferences the pointer, meaning: copy the value at the address stored in int_pointerand assign that copied value to a new variable x, with a different address.
 
     printf("Value of count: %d\n", count);
     printf("Value of x: %d\n", x);
