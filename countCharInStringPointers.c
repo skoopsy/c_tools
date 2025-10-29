@@ -1,9 +1,13 @@
 #include <stdio.h>
 
-// Subtracting a pointer later in an array from an earier pointer in the same array results in the number of pointers between them
+// Subtracting a pointer later in an array from an earier pointer 
+// in the same array results in the number of pointers between them.
+// Special case where the variable name for a array is actuall
+// a pointer to the first address in the array so instead of 
+// &string[0] you can just write string.
 
 int stringLength (const char *string) {
-    // point to the first index in the char array called string
+    // point to the address first index in the char array
     const char *pChar = string;
     
     while (*pChar != '\0'){
