@@ -6,5 +6,6 @@ int main (void) {
     printf("input a memory size: ");
     scanf("%d\n", &n);
     int *arr = malloc(n * sizeof(int)); // size known only after input
+    free(arr);
     return 0;
 }
