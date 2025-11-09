@@ -10,7 +10,7 @@ typedef struct {
 
 // Vector functions
 vec_t* vec_alloc_ptr(size_t n) {
-    /* Allocate memory to n and data for a pointer to datatype vec_t */
+    /* Allocate memory for n elements and data (doubles) for a pointer to datatype vec_t */
 
     // Alloc memory for vector structure
     vec_t *v = (vec_t*)malloc(sizeof(vec_t));
@@ -34,6 +34,19 @@ vec_t* vec_alloc_ptr(size_t n) {
     v->n = n;
 
     return v;
+}
+
+void vec_free(vec_t **ptr_v) {
+    if (!ptr_v || !*ptr_v) return;
+
+    vec_t *v = *ptr_v;
+
+    free(v->data);
+    v->data = NULL;
+    v->n = 0;
+
+    free(v);
+    *ptr_v = NULL;
 }
 
 void vec_print(const vec_t *v) {
@@ -60,14 +73,13 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
 
-
     // Use vec_ptr
-    some_vector_ptr->data[50] = 2.0;
+    some_vector_ptr->data[0] = 2.0;
+    some_vector_ptr->data[1] = 42.0;
     vec_print(some_vector_ptr);
 
     // cleanup
-    free(some_vector_ptr->data);
-    free(some_vector_ptr);
+    vec_free(&some_vector_ptr);
 
     return 0;
 }
