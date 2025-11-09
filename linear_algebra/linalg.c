@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stddef.h> // size_t
+#include <stdio.h>
 
 // Vector Structure
 typedef struct {
@@ -9,6 +10,7 @@ typedef struct {
 
 // Vector functions
 vec_t* vec_alloc_ptr(size_t n) {
+    /* Allocate memory to n and data for a pointer to datatype vec_t */
 
     // Alloc memory for vector structure
     vec_t *v = (vec_t*)malloc(sizeof(vec_t));
@@ -22,7 +24,7 @@ vec_t* vec_alloc_ptr(size_t n) {
     v->data = (double*)calloc(n, sizeof(double));
 
     // Check for runtime memory alloc failure
-    if(v->data = NULL) {
+    if(v->data == NULL) {
         fprintf(stderr, "vec_alloc_ptr error: Failed to allocate memory for %zu elements\n", n);
         free(v); // Cleanup partially initialised
         return NULL;
@@ -34,19 +36,32 @@ vec_t* vec_alloc_ptr(size_t n) {
     return v;
 }
 
+void vec_print(const vec_t *v) {
+    if (v == NULL || v->data == NULL) {
+        fprintf(stderr, "vec_print error: Cannot print a NULL/Uninitialised vector");
+        return;
+    }
+
+    printf("Vector (size %zu):\n", v->n);
+    for (size_t i=0; i< v->n; ++i) {
+        printf(" [%zu]: %.4f\n", i, v-> data[i]);
+    }
+}
+
 int main(void) {
    
     // init vec
-    vec_t *some_vector_ptr = vel_alloc_ptr(100);
+    vec_t *some_vector_ptr = vec_alloc_ptr(100);
     if (some_vector_ptr == NULL) {
         exit(EXIT_FAILURE);
     }
 
     // Use vec_ptr
-    
+    vec_print(some_vector_ptr);
+
     // cleanup
     free(some_vector_ptr->data);
-    free(my_vector_ptr);
+    free(some_vector_ptr);
 
     return 0;
 }
