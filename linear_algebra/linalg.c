@@ -37,11 +37,15 @@ vec_t* vec_alloc_ptr(size_t n) {
 }
 
 void vec_print(const vec_t *v) {
+    /* Print vector per element */
+
+    // Check exists
     if (v == NULL || v->data == NULL) {
         fprintf(stderr, "vec_print error: Cannot print a NULL/Uninitialised vector");
         return;
     }
 
+    // Print it
     printf("Vector (size %zu):\n", v->n);
     for (size_t i=0; i< v->n; ++i) {
         printf(" [%zu]: %.4f\n", i, v-> data[i]);
@@ -56,7 +60,9 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
 
+
     // Use vec_ptr
+    some_vector_ptr->data[50] = 2.0;
     vec_print(some_vector_ptr);
 
     // cleanup
